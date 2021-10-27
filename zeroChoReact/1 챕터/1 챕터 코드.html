@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!--React를 불러옴-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!--ReactDOM을 불러옴-->
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--결과 <div id="root"><button>Like</button></div>-->
+    <script>
+      const e = React.createElement;
+
+      class LikeButton extends React.Component {
+        //컴포넌트
+        constructor(props) {
+          //컴포넌트가 처음에 실행될때
+          super(props);
+          this.state = {
+            liked: false,
+          };
+        }
+
+        render() {
+          return e(
+            "button",
+            {
+              onClick: () => {
+                this.setState({ liked: true });
+              },
+              type: "submit",
+            },
+            this.state.liked === true ? "Liked" : "Like" //Liked 가 ture면 Liked false면 Like
+          ); //<button onclick="() => {console.log('clicked')}"" type='submit'>Like</button> 을 만들겠다
+          //버튼을 클릭하면 clicked 콘솔에 출력
+        }
+      }
+    </script>
+    <script>
+      ReactDOM.render(e(LikeButton), document.querySelector("#root")); //아까 만들었던 버튼을 root안에 만든다
+    </script>
+  </body>
+</html>
