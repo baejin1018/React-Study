@@ -1,0 +1,76 @@
+<!-- zeroCho 님의 강의를 듣기전에 제가 만들어본 구구단게임 입니다
+문제점 : 답을맞춰도 곱하기 값이 변하지 않음 -->
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!--React를 불러옴-->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!--ReactDOM을 불러옴-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!--결과 <div id="root"><button>Like</button></div>-->
+    <script type="text/babel">
+      class Gugudan extends React.Component {
+        state = {
+          num1: Math.ceil(Math.random() * 9),
+          num2: Math.ceil(Math.random() * 9),
+          myNum: "",
+          A: "",
+        };
+        shouldComponentDidUpdate(prevProps, prevState) {
+          if (this.prevState.A === true) {
+            this.setState({
+              num1: this.state.A
+                ? Math.ceil(Math.random() * 9)
+                : this.state.num1,
+              num2: this.state.A
+                ? Math.ceil(Math.random() * 9)
+                : this.state.num2,
+            });
+          }
+        }
+        render() {
+          return (
+            <div>
+              <h1>
+                {this.state.num1} X {this.state.num2} = ?
+              </h1>
+              <input
+                type="text"
+                onChange={(e) => {
+                  this.setState({
+                    myNum: e.target.value,
+                  });
+                }}
+              />
+              <button
+                onClick={() => {
+                  this.setState({
+                    A:
+                      this.state.num1 * this.state.num2 ===
+                      Number(this.state.myNum)
+                        ? true
+                        : false,
+                  });
+                }}
+              >
+                입력
+              </button>
+              <p>{this.state.A === "" ? "" : this.state.A ? "딩동댕" : "떙"}</p>
+            </div>
+          );
+        }
+      }
+    </script>
+    <script type="text/babel">
+      ReactDOM.render(
+        <div>
+          <Gugudan />
+        </div>,
+        document.querySelector("#root")
+      );
+    </script>
+  </body>
+</html>
