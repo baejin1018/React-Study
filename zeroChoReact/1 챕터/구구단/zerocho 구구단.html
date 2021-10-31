@@ -20,6 +20,13 @@
             value: "",
             result: "",
           };
+          //   state = {
+          //     first: Math.ceil(Math.random() * 9),
+          //     second: Math.ceil(Math.random() * 9),
+          //     value: "",
+          //     result: "",
+          //   };
+          //constructor(props) super(props); this 안쓰고도 사용가능
         }
         onSubmit = (e) => {
           e.preventDefault();
@@ -32,20 +39,43 @@
               first: Math.ceil(Math.random() * 9),
               second: Math.ceil(Math.random() * 9),
               value: "",
+              result: `정답 ! ${this.state.first}X${this.state.second} = ${
+                this.state.first * this.state.second
+              }`,
+              //   this.setState((prevState) => { //예전  state의 값으로 새로운 state의 값을 만들때는 이렇게 써야한다
+              //   return {
+              //     result: "정답",
+              //     first: Math.ceil(Math.random() * 9),
+              //     second: Math.ceil(Math.random() * 9),
+              //     value: "",
+              //     result: `정답 ! ${this.prevState.first}X${this.prevState.second} = ${
+              //       this.prevState.first * this.prevState.second
+              //     }`,
+              //   };
             });
           } else {
             this.setState({
               result: "땡",
               value: "",
             });
+            this.input.focus(); //input을 focus 해준다
           }
         };
 
-        onChange = (e) => this.setState({ value: e.target.value });
+        input; //ref
+        //ref DOM에 직접 접근하고싶을때 사용
+        //리액트에서도 DOM에 이름을 다는 방법 HTML에서 id를 달듯이 React에서는 ref를 씀
+        //<input ref={(ref) => {this.input=ref}}/> 이렇게 쓴다면 this.input으로 접근이가능
+        //<input ref={(ref) => {this.a=ref}}/>//만약 이렇게 썼다면 this.a로 input에 접근할수 있다
+        onRefInput = (c) => {
+          this.input = c;
+        };
+        onChange = (e) => this.setState({ value: e.target.value }); //function으로 쓰면 this가 달라져서 안됨
 
         render() {
+          console.log("랜더링"); //setState를 할때마다 랜더링이 된다(랜더함수가 다시 실행됨)
           return (
-            <div>
+            <React.Fragment>
               <div>
                 {this.state.first}곱하기{this.state.second}는?
               </div>
@@ -53,12 +83,13 @@
                 <input
                   type="text"
                   value={this.state.value}
-                  onChange={this.onChange}
+                  onChange={this.onChange} //안에 함수를 안 적는 이유 랜더링될때 마다 함수가 다시 만들어지는데 함수가 복잡하면 그 낭비가 크기 때분에 밖으로 빼낸다
+                  ref={this.onRefInput}
                 />
                 <button>입력</button>
               </form>
               <div>{this.state.result}</div>
-            </div>
+            </React.Fragment>
           );
         }
       }
