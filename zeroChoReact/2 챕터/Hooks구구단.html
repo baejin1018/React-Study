@@ -8,7 +8,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- react에서는 Html class -> className 으로 쓰고 for -> labelFor로 사용한다 -->
+    <!-- react에서는 Html class -> className 으로 쓰고 for -> htmlFor 사용한다 -->
     <script type="text/babel">
       // class GuguDan extends React.Component{
       // 클래스형 컴포넌트
@@ -20,6 +20,7 @@
         //-> 그래서 state와 ref를 쓸수있게 만듬 그게 Hooks
 
         // 여기서는 state가 변하면 class 형과 달리 GuGUDan 함수 전체가 재실행된다
+        //setState가 4개 가 있다고 4번 재실행 되는것이 아니라 리액트가 알아서 처리하여 한번만 재실행 된다
         const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
         const [second, setSecond] = React.useState(
           Math.ceil(Math.random() * 9)
@@ -36,7 +37,10 @@
         const onClickButton = (e) => {
           e.preventDefault();
           if (parseInt(value) === first * second) {
-            setResult("정답:" + value);
+            //예전 state를 활용하는 경우
+            setResult((prevResult) => {
+              return "정답:" + value;
+            });
             setFirst(Math.ceil(Math.random() * 9));
             setSecond(Math.ceil(Math.random() * 9));
             setValue("");
