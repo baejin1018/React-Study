@@ -27,3 +27,28 @@
 
 - 로더가 파일단위로 처리하는 반면 플러그인은 번들된 결과물을 처리한다.
 - 로더가 변환하는 동안 플러그인은과 같은 일을 진행할 수 있다.
+
+<br>
+
+# 웹팩 설치하기
+
+### 1. npm init 후 package이름 정하기
+
+### 2. 터미널을 킨다음 npm i react react-dom (react와 reactdom 설치) 입력
+
+### 3. npm i -D webpack webpack-cli 입력 (npm i -D에 -D는 개발용으로만 쓴다는 의미)
+
+### 4. webpack.config.js 파일과 client.jsx 파일을 만든다
+
+### 5. webpack.config.js 파일에 밑에 코드 입력
+
+```js
+module.exports = {};
+```
+
+### 6. client.js 파일에 밑에 코드 입력
+
+```js
+const React = require("react");
+const ReactDom = require("react-dom");
+```
