@@ -30,7 +30,7 @@
 
 <br>
 
-# 웹팩 설치하기
+# 웹팩 빌드하기
 
 ### 1. npm init 후 package이름 정하기
 
@@ -38,17 +38,69 @@
 
 ### 3. npm i -D webpack webpack-cli 입력 (npm i -D에 -D는 개발용으로만 쓴다는 의미)
 
-### 4. webpack.config.js 파일과 client.jsx 파일을 만든다
+### 4. `npm i babel-loader @babel/core` 터미널에 입력
 
-### 5. webpack.config.js 파일에 밑에 코드 입력
+### 5. `npm i -D @babel/preset-env` (환경에 맞게 바벨로 맞춰주는것) 터미널에 입력
+
+### 6. `npm i -D @babel/preset-react` (jsx 문법을 쓰게 해줌) 터미널에 입력
+
+### 7. webpack.config.js 파일과 client.jsx 파일을 만든다
+
+### 8. webpack.config.js 파일에 밑에 코드 입력
 
 ```js
-module.exports = {};
+const path = require("path");
+
+module.exports = {
+  mode: "development",
+  devtool: "eval",
+  resolve: {
+    extensions: [".jsx", ".js"], //이걸 쓰면 entry app 여기에서 확장자 생략갸능
+  },
+  entry: {
+    app: "./client",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?$/,
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+        },
+      },
+    ],
+  },
+  output: {
+    filename: "app.js",
+    path: path.join(__dirname, "dist"),
+  },
+};
 ```
 
-### 6. client.js 파일에 밑에 코드 입력
+### 9. client.js 파일에 밑에 코드 입력
 
 ```js
 const React = require("react");
-const ReactDom = require("react-dom");
+const ReactDOM = require("react-dom");
+
+const 컴포넌트 이름 = require("파일이름");
+
+ReactDOM.render(<컴포넌트이름 />, document.querySelector("#root"));
+
+```
+
+### 10. html 파일을 만들어서 밑에 코드 입력
+
+```html
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>구구단</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./dist/app.js"></script>
+  </body>
+</html>
 ```
