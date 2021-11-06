@@ -3,12 +3,28 @@ const { Component } = React;
 
 class WordRelay extends Component {
   state = {
-    text: "Hello webpack",
+    word: "배진영",
+    value: "",
+    result: "",
   };
 
   render() {
-    return <h1>{this.state.text}</h1>;
+    return (
+      <>
+        <div>{this.state.word}</div>
+        <form onSubmit={this.onSubmitForm}>
+          <input
+            type="text"
+            ref={this.onRefInput}
+            value={this.state.value}
+            onChange={this.omChangeInput}
+          />
+          <button>입력</button>
+        </form>
+        <div>{this.state.result}</div>
+      </>
+    );
   }
 }
 
-module.exports = WordRelay; // 쪼갠 파일에서 쓰는 컴포넌트를 밖에써도 쓰게 해준느것
+module.exports = WordRelay;
