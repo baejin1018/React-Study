@@ -29,7 +29,7 @@ module.exports = {
             ],
             "@babel/preset-react",
           ],
-          plugins: ["@babel/plugin-proposak=l-class-properties"],
+          plugins: ["@babel/plugin-proposal-class-properties"],
         },
       },
     ],
@@ -37,6 +37,6 @@ module.exports = {
   plugins: [],
   output: {
     filename: "app.js",
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "wordRelay"),
   },
 };
