@@ -3,7 +3,7 @@ const { Component } = React;
 
 class WordRelay extends Component {
   state = {
-    word: "배진영",
+    word: "사과",
     value: "",
     result: "",
   };
@@ -14,7 +14,7 @@ class WordRelay extends Component {
       // 입력된 첫번째 값이 word의 마지막 글자와 같은지
       this.setState({
         //같다면 이렇게 값 변경
-        result: "딩동댕",
+        result: "정답",
         word: this.state.value,
         value: "",
       });

@@ -96,7 +96,7 @@ ReactDOM.render(<컴포넌트이름 />, document.querySelector("#root"));
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>구구단</title>
+    <title>이름</title>
   </head>
   <body>
     <div id="root"></div>
