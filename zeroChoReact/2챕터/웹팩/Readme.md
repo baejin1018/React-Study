@@ -104,3 +104,9 @@ ReactDOM.render(<컴포넌트이름 />, document.querySelector("#root"));
   </body>
 </html>
 ```
+
+## 웹팩 데브서버와 핫리로딩 다운
+
+### `npm i react-refresh @pmmmwh/react-refresh-webpack-plugin -D`
+
+### `npm i -D webpack-dev-server`
