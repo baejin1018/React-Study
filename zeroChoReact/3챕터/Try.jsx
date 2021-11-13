@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-class Try extends Component {
+class Try extends PureComponent {
   render() {
     /*const {tryInfo} = this.props; 이걸쓰면 밑에 주석처럼 this.props를 생략가능하다*/
     return (
