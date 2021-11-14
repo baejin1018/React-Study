@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import Try from "./Try";
 
 function getNumbers() {
@@ -90,6 +90,8 @@ class NumberBaseball extends Component {
           ],
           value: "",
         });
+        this.inputRef.focus();
+        //this.inputRef.current.focus(); createRef를 쓰면 이렇게 사용
       }
     }
   };
@@ -99,6 +101,11 @@ class NumberBaseball extends Component {
     });
   };
 
+  //inputRef = createRef(); createRef를 쓰면 이렇게 사용
+  onInputRef = (c) => {
+    this.inputRef = c;
+  };
+
   render() {
     return (
       <>
@@ -106,6 +113,8 @@ class NumberBaseball extends Component {
         <h1>{this.state.result}</h1>
         <form onSubmit={this.onSubmitForm}>
           <input
+            ref={this.onInputRef}
+            //ref={this.inputRef} createRef를 쓰면 이렇게 사용
             maxLength={4}
             value={this.state.value}
             onChange={this.onChangeInput}
