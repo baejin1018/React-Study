@@ -1,27 +1,47 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
+  name: "response-check-dev",
+  mode: "development",
+  devtool: "inline-source-map",
   resolve: {
-    extensions: [".jsx", ".js"], //이걸 쓰면 entry app 여기에서 확장자 생략갸능
+    extensions: [".js", ".jsx"],
   },
-  entry: "./client.js",
-  output: {
-    filename: "[name].[chunkhash].js",
-    path: path.join(__dirname, "dist"),
-    publicPath: "/dist/",
+  entry: {
+    app: "./client",
   },
-  mode: "production",
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-react"],
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                targets: { browsers: ["last 2 chrome versions"] },
+                debug: true,
+              },
+            ],
+            "@babel/preset-react",
+          ],
+          plugins: ["react-refresh/babel"],
         },
+        exclude: path.join(__dirname, "node_modules"),
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [new ReactRefreshWebpackPlugin()],
+  output: {
+    path: path.join(__dirname, "dist"),
+    filename: "app.js",
+    publicPath: "/dist",
+  },
+  devServer: {
+    devMiddleware: { publicPath: "/dist" },
+    static: { directory: path.resolve(__dirname) },
+    hot: true,
+  },
 };
