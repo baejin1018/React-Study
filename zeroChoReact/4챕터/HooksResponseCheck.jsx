@@ -34,6 +34,7 @@ const ResponseCheck = () => {
       });
     }
   };
+
   const onReset = () => {
     setResult([]);
   };
@@ -56,6 +57,22 @@ const ResponseCheck = () => {
       <div id="screen" className={state} onClick={onClickScreen}>
         {message}
       </div>
+      {/* {() => { //return 안에 if 쓰는법 함수안에는 if를 쓸수 있는것을 이용하여 즉시 실행 함수를 만든후 그안에서 if 사용 (for도 이렇게 사용가능)
+        if (result.length === 0) {
+          return null;
+        } else {
+          return (
+            <>
+              <div>
+                평균 시간:
+                {result.reduce((a, c) => a + c) / result.length}
+                ms
+              </div>
+              <button onClick={onReset}>리셋</button>
+            </>
+          );
+        }
+      }} */}
       {renderAverage()}
     </>
   );
