@@ -26,7 +26,7 @@ const HooksRSP = () => {
 
   useEffect(() => {
     //라이프 사이클 대체
-    //첫번쨰는 함수가 들어가고
+    //첫번쨰는 함수가 들어가고 
     //두번째 배열은  useEffect를 실행하고 싶은 state를 넣는다
     //여기서는 imgCoord가 들어감
     // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
