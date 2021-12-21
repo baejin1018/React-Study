@@ -24,7 +24,7 @@ function getWinNumbers() {
 }
 
 const HooksLotto = () => {
-  const lottoNumbers = useMemo(() => getWinNumbers(), []);
+  const lottoNumbers = useMemo(() => getWinNumbers(), []); //useMemo 함수의 결과 값을 기억
   const [winNumbers, setWinNumbers] = useState(lottoNumbers);
   const [winBalls, setWinBalls] = useState([]);
   const [bonus, setBonus] = useState(null);
@@ -48,14 +48,28 @@ const HooksLotto = () => {
     };
   }, [timeouts.current]); //inputs 자리가 빈 배열이면 componentDidMount와 동일
   //배열에 요소가 있으면 componrntDidMount랑 componentDidMount 둘다 수행
+  
+//   useEffect(()=>{
+//       //
+//   },[]); //componentDidMount만 하고싶을때
 
+//   const mounted = useRef(false);
+//   useEffect(()=>{
+//       if(!mounted.current){
+//           mounted.current = true;
+//       }else{
+//           //
+//       }
+//   },[바뀌는값]); // componentDidUpdate만 하고싶을때
+  
+ 
   const onClickRedo = useCallback(() => {
     setWinNumbers(getWinNumbers());
     setWinBalls([]);
     setBonus(null);
     setRedo(false);
     timeouts.current = [];
-  }, [winNumbers]);
+  }, [winNumbers]); //useCallback 도 useEffect와 같이 []안에 넣은 값이 변경되면 다시 실행한다
 
   return (
     <>
