@@ -134,6 +134,7 @@ const TicTacToe = () => {
         tableData={state.tableData}
         dispatch={dispatch}
       />
+      <div>{state.turn}님의 차례</div>
       {state.winner && <div>{state.winner}님의 승리</div>}
     </>
   );
