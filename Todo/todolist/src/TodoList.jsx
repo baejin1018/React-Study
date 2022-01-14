@@ -11,8 +11,9 @@ const TodoList = ({ list, setList }) => {
       {list.map((text, index) => {
         return (
           <>
-            <li>{text}</li>
-            <button onClick={() => onClickDel(index)}>❌</button>
+            <li>
+              {text} <button onClick={() => onClickDel(index)}>❌</button>
+            </li>
           </>
         );
       })}
