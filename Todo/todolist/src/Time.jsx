@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-
+const today = new Date();
+const dayNum = today.getDay();
 const DayE = () => {
   switch (dayNum) {
     case 0: {
       return "SUN";
     }
     case 1: {
-      return "SUN";
+      return "MON";
     }
     case 2: {
-      return "MON";
+      return "TUE";
     }
     case 3: {
       return "WED";
@@ -27,12 +28,10 @@ const DayE = () => {
 };
 
 const Time = () => {
-  const today = new Date();
   const [year, setYear] = useState("");
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
   const [day, setDay] = useState("");
-  const dayNum = today.getDay();
 
   const time = () => {
     setDay(DayE());

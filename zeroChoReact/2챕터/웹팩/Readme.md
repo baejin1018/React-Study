@@ -33,7 +33,7 @@
 # 웹팩 빌드하기
 
 ### 1. npm init 후 package이름 정하기
-
+ 
 ### 2. 터미널을 킨다음 npm i react react-dom (react와 reactdom 설치) 입력
 
 ### 3. npm i -D webpack webpack-cli 입력 (npm i -D에 -D는 개발용으로만 쓴다는 의미)

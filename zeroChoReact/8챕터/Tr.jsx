@@ -1,4 +1,11 @@
 import React from "react";
-const Tr = () => {};
+import Td from "./Td";
+const Tr = () => {
+  return (
+    <tr>
+      <Td />
+    </tr>
+  );
+};
 
-export default Td;
+export default Tr;
