@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Calculator = () => {
   const [result, setResult] = useState("");
-
+  const [r, setR] = useState("");
   const onClickBtn = (e) => {
+    if (r) {
+      setResult("");
+      setR(0);
+    }
     setResult(result.concat(e.target.name));
   };
+
+  const onClickResult = () => {
+    setResult(eval(result));
+    setR(1);
+  };
+
+  const onClickDel = () => {
+    setResult(result.slice(0, -1));
+  };
+
+  const onClickClear = () => {
+    setResult("");
+  };
+
   return (
     <div>
       <div>{result}</div>
@@ -52,6 +70,9 @@ const Calculator = () => {
         <button name="*" onClick={onClickBtn}>
           *
         </button>
+        <button onClick={onClickDel}>Del</button>
+        <button onClick={onClickResult}>=</button>
+        <button onClick={onClickClear}>Clear</button>
       </div>
     </div>
   );
