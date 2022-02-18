@@ -1,9 +1,11 @@
+import ScrollBox from "./ScrollBox";
 import Validation from "./Validation";
 
 function App() {
   return (
     <div>
-      <Validation />
+      {/* /<Validation /> */}
+      <ScrollBox />
     </div>
   );
 }

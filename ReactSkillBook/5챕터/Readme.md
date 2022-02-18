@@ -101,3 +101,43 @@ export default Validation;
 <br/>
 
 # 컴포넌트에 ref 달기
+
+### 컴포넌트 내부에 있는 DOM을 외부에서 사용할때 쓴다
+
+### Ex
+
+```js
+import React from "react";
+
+const ScrollBox = () => {
+  const box = React.useRef();
+  const style = {
+    border: "1px solid black",
+    height: "300px",
+    width: "300px",
+    overflow: "auto",
+    position: "relative",
+  };
+  const innerStyle = {
+    width: "100%",
+    height: "2000px",
+    background: "linear-gradient(white,black)",
+  };
+
+  const scrollBottom = () => {
+    box.current.scrollTop = box.current.scrollHeight - box.current.clientHeight;
+  };
+  return (
+    <>
+      <div style={style} ref={box}>
+        <div style={innerStyle}></div>
+      </div>
+      <button onClick={scrollBottom}>민 밑으로</button>
+    </>
+  );
+};
+
+export default ScrollBox;
+```
+
+### 컴포넌트에 ref를 다는것을 이용하여 컴포넌트 스크롤바를 외부에서 조종할수 있게 한 코드이다
