@@ -140,4 +140,10 @@ const ScrollBox = () => {
 export default ScrollBox;
 ```
 
+#### \* scrollTop : 세로 스크롤바 위치
+
+#### \* scrollHeight : 스크롤이 있는 박스안의 div 높이
+
+#### \* clientHeight : 스크롤이 있는 박스의 높이
+
 ### 컴포넌트에 ref를 다는것을 이용하여 컴포넌트 스크롤바를 외부에서 조종할수 있게 한 코드이다
