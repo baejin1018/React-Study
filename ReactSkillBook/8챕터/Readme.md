@@ -128,3 +128,213 @@ useEffect(() => {
 ```
 
 ### 두번째 파라미터에 비어있는 배열을 넣으면 언마운트 될때만 실행된다
+
+# useReducer
+
+### useState보다 더 다야안 컴포넌트 상황에 따라 다양한 상태를 다른 값으로 업데이트 할때 사용
+
+### 현재 상태 , 업데이트에 필요한 정보를 담은 액션 값을 전달받아 새로운 상태를 반환한다
+
+```js
+function reducer(state,action){
+    switch(action.type){
+        case '액션 이름':
+            return 반환할 값
+    }
+}
+```
+
+### 액션 값 형태
+
+```js
+{
+  type: "타입이름";
+}
+```
+
+### Ex
+
+```js
+import React, { useReducer } from "react";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "plus":
+      return { value: state.value + 1 };
+    case "minus":
+      return { value: state.value - 1 };
+    default:
+      return state;
+  }
+}
+const ReducerCounter = () => {
+  const [state, dispatch] = useReducer(reducer, { value: 0 });
+  return (
+    <>
+      <p>현재 카운터 값 : {state.value}</p>
+      <button onClick={() => dispatch({ type: "plus" })}> +1 </button>
+      <button onClick={() => dispatch({ type: "minus" })}> -1 </button>
+    </>
+  );
+};
+
+export default ReducerCounter;
+```
+
+### useReducer를 이용한 카운터
+
+### `useReducer(reducer, { value: 0 });` useReducer 의 첫번째 파라미터는 리듀스 함수를 넣고 두번쨰에는 해당 리듀서의 기본값을 넣어준다
+
+### useReducer를 사용하면 state와 dispatch를 받아온다
+
+### `dispatch({ type: "plus" })}` 이렇게 dispatch는 액션을 발생시키는 함수이다
+
+# useMemo
+
+### 값을 기억하여 성능 최적화를 해준다
+
+### Ex
+
+```js
+import React, { useMemo, useState } from "react";
+
+const getAverage = (numbers) => {
+  console.log("평균 구하는중");
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+};
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [num, setNum] = useState();
+
+  const onChange = (e) => {
+    setNum(e.target.value);
+  };
+
+  const onClick = (e) => {
+    const nextList = list.concat(parseInt(num));
+    setList(nextList);
+    setNum("");
+  };
+
+  const onClickDel = () => {
+    setList([]);
+  };
+
+  const avg = useMemo(() => getAverage(list), [list]);
+  return (
+    <div>
+      <input type="text" value={num} onChange={onChange} />
+      <button onClick={onClick}>등록</button>
+      <ul>
+        {list.map((value, index) => {
+          <li key={index}>{value}</li>;
+        })}
+      </ul>
+      <b> 평균값 : </b> {avg}
+      <button onClick={onClickDel}>초기화</button>
+    </div>
+  );
+};
+
+export default Average;
+```
+
+### `useMemo(() => getAverage(list), [list]);` 이런식으로 사용
+
+### 두번째 파라미터의 값이 변경되지 않으면 그전에 값을 기억하여 다시 연산하지 않는다
+
+# useCallback
+
+### use Callback는 useMemo와 비슷하다
+
+### 렌더링 성능최적화할때 사용
+
+### 함수를 기억
+
+### Ex
+
+```js
+import React, { useCallback, useMemo, useState } from "react";
+
+const getAverage = (numbers) => {
+  console.log("평균 구하는중");
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+};
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [num, setNum] = useState();
+
+  const onChange = useCallback((e) => {
+    setNum(e.target.value);
+  }, []);
+
+  const onClick = useCallback(() => {
+    const nextList = list.concat(parseInt(num));
+    setList(nextList);
+    setNum("");
+  }, [num, list]);
+
+  const onClickDel = () => {
+    setList([]);
+  };
+
+  const avg = useMemo(() => getAverage(list), [list]);
+  return (
+    <div>
+      <input type="text" value={num} onChange={onChange} />
+      <button onClick={onClick}>등록</button>
+      <ul>
+        {list.map((value, index) => {
+          <li key={index}>{value}</li>;
+        })}
+      </ul>
+      <b> 평균값 : </b> {avg}
+      <button onClick={onClickDel}>초기화</button>
+    </div>
+  );
+};
+
+export default Average;
+```
+
+```js
+const onClick = useCallback(() => {
+  const nextList = list.concat(parseInt(num));
+  setList(nextList);
+  setNum("");
+}, [num, list]);
+```
+
+### 이렇게 사용
+
+### useCallback의 첫번쨰 파라미터는 생성하고 싶은 함수, 두번쨴,배열을 넣으면된다
+
+### 두번쨰 파라미터안에 넣은 값이 변경될따마다 함수를 새로 만든다
+
+### 만약 값이 변경되지 않으면 함수를 새로만들지 않아 성능 최적화가 된다
+
+# useRef
+
+### 함수형 컴포넌트에서 ref를 쉽게 사용할수 있도록 해줌
+
+```js
+const Ref = () => {
+  // ref를 위한 변수 선언
+  const inputRef = React.useRef(null);
+
+  //Ex  커서 이동을 원할 때,
+  inputRef.current.focus();
+
+  return <input ref={inputRef} />;
+};
+```
+
+### 이렇게 사용
+
+# 커스텀 Hook
+
+### 커스텀 훅이란 useMemo,useRef...들 처럼 내장되있는 훅이 아닌 개발자가 스스로 커스텀 한 훅을 말한다

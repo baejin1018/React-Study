@@ -1,9 +1,12 @@
+import Average from "./Average";
 import Counter from "./Counter";
-
+import ReducerCounter from "./ReducerCounter";
 function App() {
   return (
     <div>
-      <Counter />
+      {/* <Counter />/ / */}
+      {/* <ReducerCounter />/ */}
+      <Average />
     </div>
   );
 }
