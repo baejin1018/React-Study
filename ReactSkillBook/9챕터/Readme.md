@@ -134,3 +134,85 @@ const CSSModule = () => {
 
 export default CSSModule;
 ```
+
+# styled-components
+
+### 자바스크립트 안에서 파일을 선언하는 방식
+
+### npm add styled-components 로 설치
+
+### Ex
+
+```js
+import React from "react";
+import styled, { css } from "styled-components";
+const Box = styled.div`
+  background: ${(props) => props.color || "blue"};
+  padding: 1rem;
+  display: flex;
+`;
+
+const Button = styled.button`
+  background: white;
+  color: black;
+  border-radius: 4px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-cpntent: center;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-weight: 600;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  ${(props) =>
+    props.inverted &&
+    css`
+      background: none;
+      border: 2px solid white;
+      color: white;
+      &:hover {
+        background: white;
+        color: black;
+      }
+    `};
+  & + button {
+    margin-left: 1rem;
+  }
+`;
+
+const StyledComponent = () => {
+  return (
+    <Box color="black">
+      <Button>안녕하세요</Button>
+      <Button inverted={true}>테두리만</Button>
+    </Box>
+  );
+};
+
+export default StyledComponent;
+```
+
+## Tagged 템플릿 리터럴
+
+### 코드를 보면 스타일을 작성할때 <b>`</b> 를 작성한다
+
+### 이것을 `Tagged 템플릿 리터럴` 이라고 하는데 일반 템플릿 리터럴과 달리 템플릿 사이사이에 들어가는 자바스크립트 객체나 함수의 원본값을 그대로 추출한다
+
+## 스티일링된 엘리먼트 만들기
+
+```js
+import styled, { css } from "styled-components";
+const Box = styled.div`
+  background: ${(props) => props.color || "blue"};
+  padding: 1rem;
+  display: flex;
+`;
+```
+
+### 이런식으로 컴포넌트 상단에서 styled를 불러오고 `styled.태그명`을 사용한다
+
+### 그런후 토클템플릿 문법을 통해 스타일을 넣어주면 스타일이 적용된 div가 만들어진다
