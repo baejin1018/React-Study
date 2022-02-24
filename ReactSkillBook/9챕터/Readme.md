@@ -216,3 +216,56 @@ const Box = styled.div`
 ### 이런식으로 컴포넌트 상단에서 styled를 불러오고 `styled.태그명`을 사용한다
 
 ### 그런후 토클템플릿 문법을 통해 스타일을 넣어주면 스타일이 적용된 div가 만들어진다
+
+## props에 따른 조건부 스타일링
+
+### 일반 CSS 를 사용할때는 className을 사용해 조건부 스타일링을 했는데
+
+### props를 통해서 쉽게 조건부 스타일링을 할수 있다
+
+```js
+const StyledComponent = () => {
+  return (
+    <Box color="black">
+      <Button>안녕하세요</Button>
+      <Button inverted={true}>테두리만</Button>
+    </Box>
+  );
+};
+
+${(props) =>
+    props.inverted &&
+    css`
+      background: none;
+      border: 2px solid white;
+      color: white;
+      &:hover {
+        background: white;
+        color: black;
+      }
+    `};
+```
+
+### 이렇게 props를 사용해 쉽게 조건부 스타일링을 할수 있다
+
+## 반응형 디자인
+
+### 기존 CSS 처럼 @media를 사용하지만 여러컴포넌트에서 반복되어 사용할때 그 귀찮음을 줄여주고자 반응형을 함수화시켜 사용할수 있다
+
+```js
+const sizes = {
+  desktop: 1024,
+  tablet: 768,
+};
+
+const media = Object.keys(sizes).reduce((acc, lable) => {
+  acc[lable] = (...args) => css`
+    @media (max-width: ${sizes[lable] / 16}em) {
+      ${css(...args)};
+    }
+  `;
+  return acc;
+}, {});
+```
+
+##### 참고 : styled-components 메뉴얼
