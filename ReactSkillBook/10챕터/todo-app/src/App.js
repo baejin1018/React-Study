@@ -21,7 +21,7 @@ function App() {
         text,
         checked: false,
       };
-      setTodos(todos.concat(todo));
+      setTodos((todos) => todos.concat(todo));
       nextid.current += 1;
     },
     [todos]
@@ -29,14 +29,14 @@ function App() {
 
   const onRemove = useCallback(
     (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
+      setTodos((todos) => todos.filter((todo) => todo.id !== id));
     },
     [todos]
   );
 
   const onToggle = useCallback(
     (id) => {
-      setTodos(
+      setTodos((todos) =>
         todos.map((todo) =>
           todo.id === id ? { ...todo, checked: !todo.checked } : todo
         )

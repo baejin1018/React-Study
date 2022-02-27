@@ -22,4 +22,4 @@ const TodoListltem = ({ todo, onRemove, onToggle }) => {
   );
 };
 
-export default TodoListltem;
+export default React.memo(TodoListltem);
