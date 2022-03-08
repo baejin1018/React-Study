@@ -65,7 +65,7 @@ increase(0)
 
 ### 50을 넘으면 에러 발생
 
-### \* `.then` : Promise 에서 resolve된 값은 .then 을 통해 받아올수 있다
+### `.then` : Promise 에서 resolve된 값은 .then 을 통해 받아올수 있다
 
 ```js
 .catch((e) => {
@@ -102,18 +102,65 @@ async function runTasks() {
   try {
     let result = await increase(0);
     console.log(result);
-    result = await icrease(result);
+    result = await increase(result);
     console.log(result);
-    result = await icrease(result);
+    result = await increase(result);
     console.log(result);
-    result = await icrease(result);
+    result = await increase(result);
     console.log(result);
-    result = await icrease(result);
+    result = await increase(result);
     console.log(result);
-    result = await icrease(result);
+    result = await increase(result);
     console.log(result);
   } catch (e) {
     console.log(e);
   }
 }
+runTasks();
 ```
+
+# axios로 API 호출해서 데이터 받아오기
+
+### 설차벙법 : `npm i axios`
+
+### Ex
+
+```js
+import { useState } from "react";
+import axios from "axios";
+
+function App() {
+  const [data, setData] = useState(null);
+  const onClick = async () => {
+    try {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/todos/1"
+      );
+      console.log(response);
+      setData(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  return (
+    <div>
+      <div>
+        <button onClick={onClick}>불러오기</button>
+      </div>
+      {data && (
+        <textarea
+          rows={7}
+          value={JSON.stringify(data, null, 2)}
+          readOnly={true}
+        />
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+### onClick 함수에서 `axios.get` 이라는 함수를 사용했다
+
+### axios.get 은 파라미터로 전달된 주소에 GET 요청을 해주고 .then을 통해 비동기적으로 확인할수 있다

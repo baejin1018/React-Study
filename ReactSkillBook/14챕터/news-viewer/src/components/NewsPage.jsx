@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Categories from "./Categories";
 import NewsList from "./NewsList";
+import { useParams } from "react-router-dom";
 
-const NewsPage = ({ match }) => {
+const NewsPage = () => {
   //   const category = match?.params.category || "all";
-  const [url, setUrl] = useState("/");
-  const category =
-    window.location.pathname !== "/"
-      ? window.location.pathname.replace("/", "")
-      : window.location.assign("http://localhost:3000/all");
+  const params = useParams();
+  const category = params.category || "all";
+  useEffect(() => {
+    console.log("params: ", params.category, "category: ", category);
+  }, []);
   return (
     <>
       <Categories />

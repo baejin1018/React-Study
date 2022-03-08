@@ -31,19 +31,15 @@ const NewsList = ({ category }) => {
         const query = category === "all" ? "" : `&category=${category}`;
         const response = await axios.get(`
           https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=e9085c012749412db8132a09e7ea243d`);
-        console.log(response);
         setArticles(response.data.articles);
+        console.log(response.data.articles);
       } catch (e) {
         console.log(e);
       }
       setLoding(false);
     };
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(articles);
-  }, [articles]);
+  }, [category]);
 
   if (loding) {
     return <NewsListBlock>대기중...</NewsListBlock>;
