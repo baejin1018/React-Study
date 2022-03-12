@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const data = {
@@ -14,6 +14,11 @@ const data = {
 const Propfile = () => {
   const params = useParams();
   const profile = data[params.username];
+
+  useEffect(() => {
+    console.log(params.username);
+    console.log(profile);
+  }, []);
 
   return (
     <div>
