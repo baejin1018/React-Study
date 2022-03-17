@@ -4,10 +4,9 @@ import NavBar from "../components/NavBar";
 export default function App({ Component, pageProps }) {
   return (
     // <Layout>
-    <>
-      <NavBar />
+    <Layout>
       <Component {...pageProps} />
-    </>
+    </Layout>
     /* <style jsx global>{`
         a {
           color: white;
