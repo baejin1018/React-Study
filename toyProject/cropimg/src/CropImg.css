@@ -1,3 +1,38 @@
 .dontshow {
   display: none;
 }
+input[type="file"]::file-selector-button {
+  padding: 0;
+  margin: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 25px;
+  background-image: url(./buttonImg.png);
+  background-position: center;
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: white;
+  font-size: 0;
+  /* border: 1px solid black; */
+}
+input[type="file"] {
+  position: absolute;
+  bottom: 0;
+  right: 45px;
+  border-radius: 50%;
+  font-size: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.container {
+  position: relative;
+  width: 250px;
+}
+
+#source {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

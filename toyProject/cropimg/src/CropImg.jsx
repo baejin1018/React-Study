@@ -10,15 +10,21 @@ const CropImg = () => {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState({});
   const [dontShowDefault, setDontShowDefault] = useState(false);
   const [dontShowCanvas, setDontShowCanvas] = useState(true);
+  const [changeBtn, setChangeBtn] = useState(false);
+  const [confirmBtn, setConfirmBtn] = useState(true);
   const saveFileImg = (e) => {
     setDontShowDefault(true);
     setImgFile(URL.createObjectURL(e.target.files[0]));
     setChoseFile(true);
     setDontShowCanvas(false);
+    setChangeBtn(true);
+    setConfirmBtn(false);
   };
 
   const onClickConfirm = useCallback(() => {
     setChoseFile(false);
+    setChangeBtn(false);
+    setConfirmBtn(true);
   }, []);
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
@@ -41,22 +47,25 @@ const CropImg = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <img
         id="source"
         src={imgFile}
         className={dontShowDefault ? "dontshow" : ""}
-        style={{ width: 200, height: 200 }}
       />
       <canvas
         className={dontShowCanvas ? "dontshow" : ""}
         id="source"
-        style={{ width: 200, height: 200 }}
         ref={canvas}
         width={croppedAreaPixels.width}
         height={croppedAreaPixels.height}
       ></canvas>
-      <input type="file" onChange={saveFileImg} accept="image/*" />
+      <input
+        type="file"
+        className={changeBtn ? "dontshow" : ""}
+        onChange={saveFileImg}
+        accept="image/*"
+      />
       {choseFile && (
         <div style={{ position: "relative", width: 400, height: 400 }}>
           <Cropper
@@ -68,10 +77,13 @@ const CropImg = () => {
             cropShape={"round"}
             cropSize={{ width: 200, height: 200 }}
             showGrid={false}
+            zoom={1}
           />
         </div>
       )}
-      <button onClick={onClickConfirm}>확인</button>
+      <button className={confirmBtn ? "dontshow" : ""} onClick={onClickConfirm}>
+        확인
+      </button>
     </div>
   );
 };
