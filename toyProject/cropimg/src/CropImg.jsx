@@ -5,6 +5,7 @@ import defaultImg from "./logo192.png";
 const CropImg = () => {
   const canvas = useRef();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
   const [imgFile, setImgFile] = useState(defaultImg);
   const [choseFile, setChoseFile] = useState(false);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState({});
@@ -77,7 +78,8 @@ const CropImg = () => {
             cropShape={"round"}
             cropSize={{ width: 200, height: 200 }}
             showGrid={false}
-            zoom={1}
+            zoom={zoom}
+            onZoomChange={setZoom}
           />
         </div>
       )}
