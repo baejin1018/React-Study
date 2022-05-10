@@ -7,26 +7,28 @@ const CropImg = () => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [imgFile, setImgFile] = useState(defaultImg);
-  const [choseFile, setChoseFile] = useState(false);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState({});
+  const [choseFile, setChoseFile] = useState(false);
   const [dontShowDefault, setDontShowDefault] = useState(false);
   const [dontShowCanvas, setDontShowCanvas] = useState(true);
   const [changeBtn, setChangeBtn] = useState(false);
   const [confirmBtn, setConfirmBtn] = useState(true);
+
   const saveFileImg = (e) => {
     setDontShowDefault(true);
     setImgFile(URL.createObjectURL(e.target.files[0]));
     setChoseFile(true);
-    setDontShowCanvas(false);
+    setDontShowCanvas(true);
     setChangeBtn(true);
     setConfirmBtn(false);
   };
 
-  const onClickConfirm = useCallback(() => {
+  const onClickConfirm = () => {
     setChoseFile(false);
     setChangeBtn(false);
     setConfirmBtn(true);
-  }, []);
+    setDontShowCanvas(false);
+  };
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     const ctx = canvas.current.getContext("2d");
@@ -52,10 +54,10 @@ const CropImg = () => {
       <img
         id="source"
         src={imgFile}
-        className={dontShowDefault ? "dontshow" : ""}
+        className={dontShowDefault && "dontshow"}
       />
       <canvas
-        className={dontShowCanvas ? "dontshow" : ""}
+        className={dontShowCanvas && "dontshow"}
         id="source"
         ref={canvas}
         width={croppedAreaPixels.width}
@@ -63,7 +65,7 @@ const CropImg = () => {
       ></canvas>
       <input
         type="file"
-        className={changeBtn ? "dontshow" : ""}
+        className={changeBtn && "dontshow"}
         onChange={saveFileImg}
         accept="image/*"
       />
@@ -83,7 +85,7 @@ const CropImg = () => {
           />
         </div>
       )}
-      <button className={confirmBtn ? "dontshow" : ""} onClick={onClickConfirm}>
+      <button className={confirmBtn && "dontshow"} onClick={onClickConfirm}>
         확인
       </button>
     </div>
