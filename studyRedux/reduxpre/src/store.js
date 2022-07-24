@@ -1,3 +1,5 @@
 import { createStore } from "redux";
-function reducer() {}
+function reducer() {
+    
+}
 const store = createStore(reducer);

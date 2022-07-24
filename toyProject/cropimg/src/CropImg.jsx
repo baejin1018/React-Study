@@ -15,8 +15,10 @@ const CropImg = () => {
   const [confirmBtn, setConfirmBtn] = useState(true);
 
   const saveFileImg = (e) => {
+    console.log(URL.createObjectURL(e.target.files[0]));
     setDontShowDefault(true);
     setImgFile(URL.createObjectURL(e.target.files[0]));
+    console.log(imgFile);
     setChoseFile(true);
     setDontShowCanvas(true);
     setChangeBtn(true);
@@ -36,6 +38,7 @@ const CropImg = () => {
 
     canvas.current.setAttribute("width", croppedAreaPixels.width);
     canvas.current.setAttribute("height", croppedAreaPixels.height);
+
     ctx.drawImage(
       image,
       croppedAreaPixels.x,
@@ -60,8 +63,8 @@ const CropImg = () => {
         className={dontShowCanvas && "dontshow"}
         id="source"
         ref={canvas}
-        width={croppedAreaPixels.width}
-        height={croppedAreaPixels.height}
+        // width={croppedAreaPixels.width}
+        // height={croppedAreaPixels.height}
       ></canvas>
       <input
         type="file"
