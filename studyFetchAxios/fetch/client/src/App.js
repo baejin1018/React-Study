@@ -25,7 +25,8 @@ function App() {
     const text = e.target.text.value;
     const done = e.target.done.checked;
     //axios로 하는법
-    //axios.post(SERVER_URL,{text,done});
+    //await axios.post(SERVER_URL,{text,done});
+    //axiosData();
     fetch(SERVER_URL, {
       method: "POST",
       headers: {
