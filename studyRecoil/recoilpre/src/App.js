@@ -1,11 +1,15 @@
-import { useRecoilState } from "recoil";
-import { counting } from "./stores/atom";
+import Count from "./Count";
+import RecoilStar from "./RecoilStar";
+import React from "react";
+import Delay from "./Delay";
 function App() {
-  const [count, setCount] = useRecoilState(counting);
   return (
     <>
-      <h1>{count}</h1>
-      <button onClick={() => setCount((prev) => prev + 1)}>+1</button>
+      {/* <Count /> */}
+      {/* <React.Suspense fallback={<div>로딩중</div>}> */}
+      {/* <RecoilStar /> */}
+      {/* </React.Suspense> */}
+      <Delay />
     </>
   );
 }
