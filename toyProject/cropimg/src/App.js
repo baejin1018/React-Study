@@ -1,9 +1,11 @@
 import CropImg from "./CropImg";
+import View from "./View";
 
 function App() {
   return (
     <div>
-      <CropImg />
+      {/* <CropImg /> */}
+      <View />
     </div>
   );
 }
